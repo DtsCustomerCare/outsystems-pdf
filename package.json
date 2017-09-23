@@ -1,0 +1,19 @@
+{
+  "name": "PDFManipulation",
+  "version": "1.0.0",
+  "description": "PDF Plugin",
+  "cordova": {
+    "id": "org.joaquim.pdf",
+    "platforms": [
+      "android"
+    ]
+  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.5.0"
+    }
+  ],
+  "author": "Joaquim Pereira",
+  "license": "Apache 2.0 License"
+}

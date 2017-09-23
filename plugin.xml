@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="org.joaquim.pdf"
+        version="0.0.1">
+
+  <name>PDF Plugin</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.5.0"/>
+  </engines>
+
+  <asset src="www/pdf.js" target="js/pdf.js"/>
+
+  <js-module src="www/pdf.js" name="pdf">
+    <clobbers target="pdf" />
+  </js-module>
+
+  <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Pdf">
+        <param name="android-package" value="org.joaquim.plugin.Pdf"/>
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/org/joaquim/plugin/" target-dir="src/org/joaquim/" />
+
+    <lib-file src="src/android/libs/itext5-itextpdf-5.5.12.jar" target-dir="libs" arch="device" />
+
+  </platform>
+
+
+</plugin>
