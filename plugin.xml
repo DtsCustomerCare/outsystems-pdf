@@ -9,10 +9,10 @@
     <engine name="cordova" version=">=3.5.0"/>
   </engines>
 
-  <asset src="www/pdf.js" target="js/pdf.js"/>
+  <asset src="www/pdfmerge.js" target="js/pdfmerge.js"/>
 
-  <js-module src="www/pdf.js" name="pdf">
-    <clobbers target="pdf" />
+  <js-module src="www/pdfmerge.js" name="pdfmerge">
+    <clobbers target="pdfmerge" />
   </js-module>
 
   <platform name="android">
