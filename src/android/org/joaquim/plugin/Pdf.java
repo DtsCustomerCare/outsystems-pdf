@@ -3,6 +3,7 @@ package org.joaquim.plugin;
 import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
+import java.util.Set;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
@@ -13,6 +14,7 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.codec.Base64;
+import com.itextpdf.text.pdf.AcroFields;
 
 import java.io.ByteArrayOutputStream;
 
@@ -34,6 +36,26 @@ public class Pdf extends CordovaPlugin {
 
                 PdfReader reader = new PdfReader(Base64.decode(pdf_base64));
                 PdfStamper stamper = new PdfStamper(reader, pdf_out);
+                AcroFields fields = stamper.getAcroFields();
+
+                Set<String> fldNames = fields.getFields().keySet();
+                for (String fldName : fldNames) {
+                      
+                  List<AcroFields.FieldPosition> positions = fields.getFieldPositions(fldName);
+                  Rectangle rect = positions.get(0).position; // In points:
+                  float left   = rect.getLeft();
+                  float bTop   = rect.getTop();
+                  float width  = rect.getWidth();
+                  float height = rect.getHeight();
+
+                  int page = positions.get(0).page;
+
+                  //System.out.println(" : Page [" + page + "] PosX[" + left + "] PosY[" + bTop + "] Width[" + width + "] Height[" + height + "]\n\n");
+                  posX = left;
+                  posY = bTop;
+
+                  fields.removeField(fldName);
+                }
 
                 Image image = Image.getInstance( Base64.decode(png_base64) );
                 image.scalePercent( scale );
