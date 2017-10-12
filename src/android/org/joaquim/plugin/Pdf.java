@@ -4,6 +4,7 @@ import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.util.Set;
+import java.util.List;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
