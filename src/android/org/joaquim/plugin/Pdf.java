@@ -56,7 +56,7 @@ public class Pdf extends CordovaPlugin {
                   posX = (int)left;
                   posY = (int)bTop;
 
-                  fields.removeField(fldName);
+                  //fields.removeField(fldName);
                 }
 
                 Image image = Image.getInstance( Base64.decode(png_base64) );
