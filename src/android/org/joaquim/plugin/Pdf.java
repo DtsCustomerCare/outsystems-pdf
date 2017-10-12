@@ -82,7 +82,45 @@ public class Pdf extends CordovaPlugin {
             }
             
             return true;
+        }
+        // get_position
+        else if (action.equals("get_position")) {
+            String pdf_base64 = data.getString(0);
+            Integer posX = 0, posY = 0;
+            try {
+                ByteArrayOutputStream pdf_out = new ByteArrayOutputStream();
 
+                PdfReader reader = new PdfReader(Base64.decode(pdf_base64));
+                AcroFields fields = reader.getAcroFields();
+
+                Set<String> fldNames = fields.getFields().keySet();
+                for (String fldName : fldNames) {
+                      
+                  List<AcroFields.FieldPosition> positions = fields.getFieldPositions(fldName);
+                  Rectangle rect = positions.get(0).position; // In points:
+                  float left   = rect.getLeft();
+                  float bTop   = rect.getTop();
+                  float width  = rect.getWidth();
+                  float height = rect.getHeight();
+
+                  int page = positions.get(0).page;
+
+                  //System.out.println(" : Page [" + page + "] PosX[" + left + "] PosY[" + bTop + "] Width[" + width + "] Height[" + height + "]\n\n");
+                  posX = (int)left;
+                  posY = (int)bTop;
+
+                  //fields.removeField(fldName);
+                }
+
+                reader.close();                
+
+                callbackContext.success("{\"posX\" : \"" + posX + "\", \"posY\" : \"" + posY + "\"}");
+
+            } catch( Exception e ) {
+                callbackContext.error(e.toString());
+            }
+            
+            return true;
         } else {
             
             return false;
