@@ -53,8 +53,8 @@ public class Pdf extends CordovaPlugin {
                   int page = positions.get(0).page;
 
                   //System.out.println(" : Page [" + page + "] PosX[" + left + "] PosY[" + bTop + "] Width[" + width + "] Height[" + height + "]\n\n");
-                  posX = left;
-                  posY = bTop;
+                  posX = (int)left;
+                  posY = (int)bTop;
 
                   fields.removeField(fldName);
                 }
