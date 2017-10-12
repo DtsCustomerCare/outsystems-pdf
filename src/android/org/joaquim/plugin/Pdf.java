@@ -16,6 +16,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.codec.Base64;
 import com.itextpdf.text.pdf.AcroFields;
+import com.itextpdf.text.Rectangle;
 
 import java.io.ByteArrayOutputStream;
 
