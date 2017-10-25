@@ -81,7 +81,7 @@ public class Pdf extends CordovaPlugin {
                 reader.close();
 
                 String pdfout_base64 = Base64.encodeBytes(pdf_out.toByteArray());
-                pdf_out.close();;
+                pdf_out.close();
                 
                 callbackContext.success(pdfout_base64);
 
