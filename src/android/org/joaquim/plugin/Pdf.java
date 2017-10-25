@@ -97,7 +97,7 @@ public class Pdf extends CordovaPlugin {
             Integer posX = 0, posY = 0;
             try {
 
-                PdfReader reader = new Pdf, Reader(Base64.decode(pdf_base64));
+                PdfReader reader = new PdfReader(Base64.decode(pdf_base64));
                 AcroFields fields = reader.getAcroFields();
 
                 Set<String> fldNames = fields.getFields().keySet();
