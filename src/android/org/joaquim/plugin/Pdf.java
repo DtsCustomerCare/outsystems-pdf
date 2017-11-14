@@ -68,20 +68,21 @@ public class Pdf extends CordovaPlugin {
                 Image image = Image.getInstance(Base64.decode(png_base64));
                 image.scalePercent(scale);
                 image.setTransparency(new int[] { 0xF0, 0xFF });
-                PdfImage stream = new PdfImage(image, "", null);
+                //PdfImage stream = new PdfImage(image, "", null);
                 //stream.put(new PdfName("ITXT_SpecialId"), new PdfName("123456789"));
 
-                PdfIndirectObject ref = stamper.getWriter().addToBody(stream);
-                image.setDirectReference(ref.getIndirectReference());
+                //PdfIndirectObject ref = stamper.getWriter().addToBody(stream);
+                //image.setDirectReference(ref.getIndirectReference());
                 image.setAbsolutePosition(posX, posY);
+                
                 PdfContentByte over = stamper.getOverContent(signaturePage);
                 over.addImage(image);
-
+                                
                 stamper.close();
-                reader.close();
+                //reader.close();
 
                 String pdfout_base64 = Base64.encodeBytes(pdf_out.toByteArray());
-                pdf_out.close();;
+                //pdf_out.close();
                 
                 callbackContext.success(pdfout_base64);
 
@@ -97,7 +98,7 @@ public class Pdf extends CordovaPlugin {
             Integer posX = 0, posY = 0;
             try {
 
-                PdfReader reader = new Pdf, Reader(Base64.decode(pdf_base64));
+                PdfReader reader = new PdfReader(Base64.decode(pdf_base64));
                 AcroFields fields = reader.getAcroFields();
 
                 Set<String> fldNames = fields.getFields().keySet();
