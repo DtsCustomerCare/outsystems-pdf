@@ -68,16 +68,17 @@ public class Pdf extends CordovaPlugin {
                 Image image = Image.getInstance(Base64.decode(png_base64));
                 image.scalePercent(scale);
                 image.setTransparency(new int[] { 0xF0, 0xFF });
+                
                 //PdfImage stream = new PdfImage(image, "", null);
                 //stream.put(new PdfName("ITXT_SpecialId"), new PdfName("123456789"));
 
                 //PdfIndirectObject ref = stamper.getWriter().addToBody(stream);
                 //image.setDirectReference(ref.getIndirectReference());
+
                 image.setAbsolutePosition(posX, posY);
-                
                 PdfContentByte over = stamper.getOverContent(signaturePage);
                 over.addImage(image);
-                                
+
                 stamper.close();
                 //reader.close();
 
