@@ -67,7 +67,7 @@ public class Pdf extends CordovaPlugin {
 
                 Image image = Image.getInstance(Base64.decode(png_base64));
                 image.scalePercent(scale);
-                image.setTransparency(new int[] { 0xF0, 0xFF });
+                image.setTransparency(new int[] { 0xFF, 0xFF });
                 
                 //PdfImage stream = new PdfImage(image, "", null);
                 //stream.put(new PdfName("ITXT_SpecialId"), new PdfName("123456789"));
