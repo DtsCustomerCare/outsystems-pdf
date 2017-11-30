@@ -76,8 +76,8 @@ public class Pdf extends CordovaPlugin {
                 //image.setDirectReference(ref.getIndirectReference());
 
                 image.setAbsolutePosition(posX, posY);
-                PdfContentByte over = stamper.getOverContent(signaturePage);
-                over.addImage(image);
+                PdfContentByte under = stamper.getUnderContent(signaturePage);
+                under.addImage(image);
 
                 stamper.close();
                 //reader.close();
