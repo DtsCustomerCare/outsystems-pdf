@@ -20,6 +20,11 @@ import com.itextpdf.text.Rectangle;
 
 import java.io.ByteArrayOutputStream;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.*;
+
+
 public class Pdf extends CordovaPlugin {
 
     @Override
@@ -65,9 +70,24 @@ public class Pdf extends CordovaPlugin {
                     }
                 }
 
-                Image image = Image.getInstance(Base64.decode(png_base64));
+
+                final BufferedImage source = ImageIO.read(Base64.decode(png_base64));
+                
+                final int color = 0xffffff;
+        
+                final java.awt.Image imageWithTransparency = makeColorTransparent(source, new Color(color));
+        
+                final BufferedImage transparentImage = imageToBufferedImage(imageWithTransparency);
+        
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        
+                ImageIO.write(transparentImage, "png", baos);
+                byte[] res = baos.toByteArray();
+
+                Image image = Image.getInstance(res);
                 image.scalePercent(scale);
-                image.setTransparency(new int[] { 0xFF, 0xFF });
+                
+                //image.setTransparency(new int[] { 0xFF, 0xFF });
                 
                 //PdfImage stream = new PdfImage(image, "", null);
                 //stream.put(new PdfName("ITXT_SpecialId"), new PdfName("123456789"));
@@ -76,8 +96,8 @@ public class Pdf extends CordovaPlugin {
                 //image.setDirectReference(ref.getIndirectReference());
 
                 image.setAbsolutePosition(posX, posY);
-                PdfContentByte under = stamper.getUnderContent(signaturePage);
-                under.addImage(image);
+                PdfContentByte content = stamper.getOverContent(signaturePage);
+                content.addImage(image);
 
                 stamper.close();
                 //reader.close();
@@ -135,5 +155,55 @@ public class Pdf extends CordovaPlugin {
             return false;
 
         }
+    }
+
+    /**
+     * Convert Image to BufferedImage.
+     *
+     * @param image Image to be converted to BufferedImage.
+     * @return BufferedImage corresponding to provided Image.
+     */
+    private static BufferedImage imageToBufferedImage(final java.awt.Image image)
+    {
+        final BufferedImage bufferedImage =
+                new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D g2 = bufferedImage.createGraphics();
+        g2.drawImage(image, 0, 0, null);
+        g2.dispose();
+        return bufferedImage;
+    }
+
+    /**
+     * Make provided image transparent wherever color matches the provided color.
+     *
+     * @param im BufferedImage whose color will be made transparent.
+     * @param color Color in provided image which will be made transparent.
+     * @return Image with transparency applied.
+     */
+    public static java.awt.Image makeColorTransparent(final BufferedImage im, final Color color)
+    {
+        final ImageFilter filter = new RGBImageFilter()
+        {
+            // the color we are looking for (white)... Alpha bits are set to opaque
+            public int markerRGB = color.getRGB() | 0xFFFFFFFF;
+
+            public final int filterRGB(final int x, final int y, final int rgb)
+            {
+                if ((rgb | 0xFF000000) == markerRGB)
+                {
+                    // Mark the alpha bits as zero - transparent
+                    return 0x00FFFFFF & rgb;
+                }
+                else
+                {
+                    // nothing to do
+                    return rgb;
+                }
+            }
+        };
+
+        final ImageProducer ip = new FilteredImageSource(im.getSource(), filter);
+
+        return Toolkit.getDefaultToolkit().createImage(ip);
     }
 }
