@@ -1,4 +1,4 @@
 
-dependencies {
-    provided files('lib/itext5-itextpdf-5.5.12.jar')
+dependencies {    
+    compile 'com.itextpdf:itextpdf:5.5.12'
 }
