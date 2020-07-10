@@ -6,7 +6,8 @@
   <name>PDF Plugin</name>
 
   <engines>
-    <engine name="cordova" version=">=3.5.0"/>
+    <engine name="cordova" version=">=7.1.0"/>
+    <engine name="cordova-android" version=">=6.3.0" />
   </engines>
 
   <asset src="www/pdfmerge.js" target="js/pdfmerge.js"/>
@@ -21,6 +22,7 @@
       <feature name="Pdf">
         <param name="android-package" value="org.joaquim.plugin.Pdf"/>
       </feature>
+      <preference name="buildArchitecture" default="arm" />
     </config-file>
 
     <source-file src="src/android/org/joaquim/plugin/" target-dir="src/org/joaquim/" />
