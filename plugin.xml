@@ -26,7 +26,7 @@
 
     <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
 
-    <source-file src="src/android/org/joaquim/plugin/Pdf.java" target-dir="src/org/joaquim/plugin" />
+    <source-file src="src/android/org/joaquim/plugin/Pdf.java" target-dir="src/org/joaquim/plugin/Pdf" />
 
     <!--lib-file src="src/android/libs/itext5-itextpdf-5.5.12.jar" target-dir="libs" arch="device" /-->
     <!--lib-file src="src/android/libs/itext5-itextpdf-5.5.12.jar" target-dir="lib" /-->
