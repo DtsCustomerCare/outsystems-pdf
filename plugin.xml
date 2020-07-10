@@ -21,13 +21,14 @@
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="Pdf">
         <param name="android-package" value="org.joaquim.plugin.Pdf"/>
-      </feature>
-      <preference name="buildArchitecture" default="arm" />
+      </feature>      
     </config-file>
+
+    <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
 
     <source-file src="src/android/org/joaquim/plugin/" target-dir="src/org/joaquim/" />
 
-    <lib-file src="src/android/libs/itext5-itextpdf-5.5.12.jar" target-dir="libs" arch="device" />
+    <!--lib-file src="src/android/libs/itext5-itextpdf-5.5.12.jar" target-dir="libs" arch="device" /-->
 
   </platform>
 
