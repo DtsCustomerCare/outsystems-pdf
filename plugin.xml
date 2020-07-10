@@ -29,7 +29,7 @@
     <source-file src="src/android/org/joaquim/plugin/" target-dir="src/org/joaquim/" />
 
     <!--lib-file src="src/android/libs/itext5-itextpdf-5.5.12.jar" target-dir="libs" arch="device" /-->
-    <source-file src="src/android/libs/itext5-itextpdf-5.5.13.1.jar" target-dir="lib" />
+    <source-file src="src/android/libs/itextpdf-5.5.13.1.jar" target-dir="lib" />
 
   </platform>
 
