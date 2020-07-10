@@ -1,4 +1,4 @@
 
 dependencies {    
-    implements 'com.itextpdf:itextpdf:5.5.12'
+    compile 'com.itextpdf:itextpdf:5.5.12'
 }
