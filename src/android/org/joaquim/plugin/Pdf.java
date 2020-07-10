@@ -20,6 +20,7 @@ import com.itextpdf.text.Rectangle;
 
 import java.io.ByteArrayOutputStream;
 
+
 public class Pdf extends CordovaPlugin {
 
     @Override
@@ -67,7 +68,8 @@ public class Pdf extends CordovaPlugin {
 
                 Image image = Image.getInstance(Base64.decode(png_base64));
                 image.scalePercent(scale);
-                image.setTransparency(new int[] { 0xF0, 0xFF });
+                
+                //image.setTransparency(new int[] { 0xFF, 0xFF });
                 
                 //PdfImage stream = new PdfImage(image, "", null);
                 //stream.put(new PdfName("ITXT_SpecialId"), new PdfName("123456789"));
@@ -76,8 +78,8 @@ public class Pdf extends CordovaPlugin {
                 //image.setDirectReference(ref.getIndirectReference());
 
                 image.setAbsolutePosition(posX, posY);
-                PdfContentByte over = stamper.getOverContent(signaturePage);
-                over.addImage(image);
+                PdfContentByte content = stamper.getOverContent(signaturePage);
+                content.addImage(image);
 
                 stamper.close();
                 //reader.close();
@@ -136,4 +138,5 @@ public class Pdf extends CordovaPlugin {
 
         }
     }
+
 }
